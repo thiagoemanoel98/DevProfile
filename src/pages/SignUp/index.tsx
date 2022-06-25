@@ -2,10 +2,9 @@ import React from 'react';
 import { ScrollView } from 'react-native';
 import { Button } from '../../components/Form/Button';
 import { Input } from '../../components/Form/Input';
-import { Container, Content, Logo, Title } from './styles';
-import logo from '../../assets/logo.png';
+import { Container, Content, Title } from './styles';
 
-export const SignIn: React.FunctionComponent = () => {
+export const SignUp: React.FunctionComponent = () => {
     return (
         // Fecha o teclado se o usuário tocar fora do teclado
         <ScrollView
@@ -14,12 +13,12 @@ export const SignIn: React.FunctionComponent = () => {
         >
             <Container>
                 <Content>
-                    <Logo source={logo} />
-                    <Title>Faça o Login</Title>
+                    <Title>Crie a sua conta</Title>
+                    <Input placeholder="Nome completo" />
                     <Input placeholder="Email" />
                     <Input placeholder="Senha" />
 
-                    <Button title="Entrar" />
+                    <Button title="Criar conta" />
                 </Content>
             </Container>
         </ScrollView>

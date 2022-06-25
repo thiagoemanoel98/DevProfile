@@ -1,15 +1,15 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
 import { ThemeProvider } from 'styled-components';
 import theme from './src/global/styles/theme';
-import { Home } from './src/pages/Home';
+
 import {
     useFonts,
     Roboto_400Regular,
     Roboto_700Bold,
 } from '@expo-google-fonts/roboto';
 import AppLoading from 'expo-app-loading';
-import { SignIn } from './src/pages/SignIn';
+import { Routes } from './src/routes';
 
 const App: React.FC = () => {
     const [fontsLoaded] = useFonts({
@@ -22,9 +22,11 @@ const App: React.FC = () => {
     }
 
     return (
-        <ThemeProvider theme={theme}>
-            <SignIn />
-        </ThemeProvider>
+        <NavigationContainer>
+            <ThemeProvider theme={theme}>
+                <Routes />
+            </ThemeProvider>
+        </NavigationContainer>
     );
 };
 
