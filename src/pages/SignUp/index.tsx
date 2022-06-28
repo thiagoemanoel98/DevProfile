@@ -1,5 +1,7 @@
 import React from 'react';
 import { useForm, FieldValues } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
 import { KeyboardAvoidingView, Platform, ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Button } from '../../components/Form/Button';
@@ -25,8 +27,21 @@ interface IFormInputs {
     [name: string]: any;
 }
 
+const formSchema = yup.object({
+    name: yup.string().required('Informe o nome.'),
+    email: yup.string().email('Email inválido').required('Informe o email.'),
+    password: yup.string().required('Digite a senha.'),
+});
+
 export const SignUp: React.FunctionComponent = () => {
-    const { handleSubmit, control } = useForm<FieldValues>();
+    const {
+        handleSubmit,
+        control,
+        formState: { errors },
+    } = useForm<FieldValues>({
+        resolver: yupResolver(formSchema),
+    });
+
     const navigation = useNavigation<ScreenNavigationProp>();
 
     const handleSignUp = (form: IFormInputs) => {
@@ -59,6 +74,7 @@ export const SignUp: React.FunctionComponent = () => {
                             control={control}
                             name="name"
                             placeholder="Nome completo"
+                            error={errors.name && errors.name.message}
                         />
 
                         <InputControl
@@ -68,6 +84,7 @@ export const SignUp: React.FunctionComponent = () => {
                             name="email"
                             placeholder="Email"
                             keyboardType="email-address"
+                            error={errors.email && errors.email.message}
                         />
                         <InputControl
                             control={control}
@@ -76,6 +93,7 @@ export const SignUp: React.FunctionComponent = () => {
                             name="password"
                             placeholder="Senha"
                             secureTextEntry
+                            error={errors.password && errors.password.message}
                         />
 
                         <Button
