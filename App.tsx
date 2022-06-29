@@ -10,6 +10,7 @@ import {
 } from '@expo-google-fonts/roboto';
 import AppLoading from 'expo-app-loading';
 import { Routes } from './src/routes';
+import { AuthContext } from './src/context/AuthContext';
 
 const App: React.FC = () => {
     const [fontsLoaded] = useFonts({
@@ -24,7 +25,9 @@ const App: React.FC = () => {
     return (
         <NavigationContainer>
             <ThemeProvider theme={theme}>
-                <Routes />
+                <AuthContext.Provider value={{ name: 'Jorge' }}>
+                    <Routes />
+                </AuthContext.Provider>
             </ThemeProvider>
         </NavigationContainer>
     );

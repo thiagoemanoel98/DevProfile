@@ -21,6 +21,7 @@ import {
 } from './styles';
 import logo from '../../assets/logo.png';
 import { InputControl } from '../../components/Form/InputControl';
+import { AuthContext } from '../../context/AuthContext';
 
 interface ScreenNavigationProp {
     navigate: (screen: string) => void;
@@ -38,6 +39,10 @@ interface IFormInputs {
 }
 
 export const SignIn: React.FunctionComponent = () => {
+    const auth = React.useContext(AuthContext);
+
+    console.log(auth);
+
     const {
         handleSubmit,
         control,
